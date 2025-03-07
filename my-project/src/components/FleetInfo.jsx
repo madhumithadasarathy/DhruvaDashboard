@@ -55,7 +55,7 @@ const FleetInfo = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const driversPerPage = 10;
 
-  // **Filter function based on search, status, and rating**
+  // Filter function based on search, status, and rating
   const filteredFleet = fleetData.filter((driver) => {
     const matchesSearch = driver.name.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -67,13 +67,13 @@ const FleetInfo = () => {
     return matchesSearch;
   });
 
-  // **Pagination logic**
+  // Pagination logic
   const indexOfLastDriver = currentPage * driversPerPage;
   const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
   const currentDrivers = filteredFleet.slice(indexOfFirstDriver, indexOfLastDriver);
   const totalPages = Math.ceil(filteredFleet.length / driversPerPage);
 
-  // **Add new driver**
+  // Add new driver
   const addNewDriver = () => {
     const newDriver = {
       id: fleetData.length + 1,
@@ -90,7 +90,7 @@ const FleetInfo = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Fleet Information</h1>
 
-      {/* **Search, Filter, and Add Driver** */}
+      {/* Search, Filter, and Add Driver */}
       <div className="flex flex-wrap items-center justify-between bg-white p-4 rounded-lg shadow-md mb-6">
         {/* Search Input */}
         <input
@@ -127,11 +127,23 @@ const FleetInfo = () => {
         </button>
       </div>
 
-      {/* **Fleet Grid** */}
+      {/* Fleet Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {currentDrivers.map((driver) => (
           <div key={driver.id} className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md">
-            <img src={driver.image} alt={driver.name} className="w-24 h-24 rounded-full border-2 border-gray-300" />
+            <div className="relative group">
+              <img
+                src={driver.image}
+                alt={driver.name}
+                className="w-24 h-24 rounded-full border-2 border-gray-300"
+              />
+
+              {/* Hover Effect for Rating */}
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 text-sm bg-black text-white rounded opacity-0 group-hover:opacity-100 transition-opacity">
+                Star Rating: {"⭐".repeat(driver.rating)}
+              </div>
+            </div>
+
             <p className="mt-2 font-semibold">{driver.name}</p>
             <p className="text-gray-500 text-sm">{driver.location}</p>
             <span
@@ -141,16 +153,11 @@ const FleetInfo = () => {
             >
               {driver.status}
             </span>
-
-            {/* **Hover Effect for Rating** */}
-            <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-black text-white text-xs p-1 rounded opacity-0 hover:opacity-100 transition-opacity">
-              Star Rating: {"⭐".repeat(driver.rating)}
-            </div>
           </div>
         ))}
       </div>
 
-      {/* **Pagination Controls** */}
+      {/* Pagination Controls */}
       <div className="mt-6 flex justify-center space-x-4">
         {[...Array(totalPages)].map((_, i) => (
           <button
