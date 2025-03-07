@@ -130,7 +130,7 @@ const FleetInfo = () => {
       {/* Fleet Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {currentDrivers.map((driver) => (
-          <div key={driver.id} className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md">
+          <Link to={`/driver/${driver.id}`} key={driver.id} className="relative flex flex-col items-center bg-white p-4 rounded-lg shadow-md cursor-pointer">
             <div className="relative group">
               <img
                 src={driver.image}
@@ -153,24 +153,26 @@ const FleetInfo = () => {
             >
               {driver.status}
             </span>
-          </div>
+          </Link>
         ))}
       </div>
 
       {/* Pagination Controls */}
-      <div className="mt-6 flex justify-center space-x-4">
-        {[...Array(totalPages)].map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`px-4 py-2 rounded ${
-              currentPage === i + 1 ? "bg-blue-500 text-white" : "bg-gray-300"
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
+      {totalPages > 1 && (
+        <div className="mt-6 flex justify-center space-x-4">
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentPage(i + 1)}
+              className={`px-4 py-2 rounded ${
+                currentPage === i + 1 ? "bg-blue-500 text-white" : "bg-gray-300"
+              }`}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
