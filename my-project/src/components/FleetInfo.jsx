@@ -56,7 +56,6 @@ const FleetInfo = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const driversPerPage = 10;
 
-  // Filter function based on search, status, and rating
   const filteredFleet = fleetData.filter((driver) => {
     const matchesSearch = driver.name.toLowerCase().includes(searchTerm.toLowerCase());
 
@@ -68,13 +67,11 @@ const FleetInfo = () => {
     return matchesSearch;
   });
 
-  // Pagination logic
   const indexOfLastDriver = currentPage * driversPerPage;
   const indexOfFirstDriver = indexOfLastDriver - driversPerPage;
   const currentDrivers = filteredFleet.slice(indexOfFirstDriver, indexOfLastDriver);
   const totalPages = Math.ceil(filteredFleet.length / driversPerPage);
 
-  // Add new driver
   const addNewDriver = () => {
     const newDriver = {
       id: fleetData.length + 1,
@@ -91,8 +88,8 @@ const FleetInfo = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       <h1 className="text-2xl font-bold text-gray-800 mb-6">Fleet Information</h1>
 
-      {/* Search, Filter, and Add Driver */}
-      <div className="flex flex-wrap items-center justify-between bg-white p-4 rounded-lg shadow-md mb-6">
+      {/* Search, Filter, and Add Driver (Aligned in One Row) */}
+      <div className="flex flex-wrap items-center bg-white p-4 rounded-lg shadow-md mb-6 space-x-4">
         {/* Search Input */}
         <input
           type="text"
@@ -102,9 +99,9 @@ const FleetInfo = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        {/* Single Filter Dropdown (Status + Rating) */}
+        {/* Filter Dropdown */}
         <select
-          className="border p-2 rounded-md w-full md:w-1/4 mt-2 md:mt-0"
+          className="border p-2 rounded-md w-full md:w-1/4"
           value={filterOption}
           onChange={(e) => setFilterOption(e.target.value)}
         >
@@ -123,7 +120,7 @@ const FleetInfo = () => {
         </select>
 
         {/* Add New Driver Button */}
-        <button onClick={addNewDriver} className="bg-blue-500 text-white px-4 py-2 rounded-md mt-2 md:mt-0">
+        <button onClick={addNewDriver} className="bg-blue-500 text-white px-4 py-2 rounded-md">
           + Add New Driver
         </button>
       </div>

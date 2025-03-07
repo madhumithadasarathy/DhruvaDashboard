@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import Theme from "./components/Theme";
 import Language from "./components/Language";
+import DriverProfile from "./components/DriverProfile"; // Import DriverProfiles component
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/settings" element={<Settings />} />
           <Route path="/theme" element={<Theme />} />
           <Route path="/language" element={<Language />} />
+          <Route path="/driver/:id" element={<DriverProfile />} /> {/* New Route for Driver Profiles */}
         </Routes>
       </div>
     </Router>

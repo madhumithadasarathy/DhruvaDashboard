@@ -6,9 +6,9 @@ const Header = () => {
     <header className="flex justify-between items-center p-4 bg-white shadow-md font-poppins">
       <div className="text-xl font-bold ml-2 tracking-widest">DHRUVA</div>
       <nav className="flex items-center space-x-6">
-        <Link to="/" className="text-gray-700 hover:text-blue-500">Home</Link>
-        <Link to="/fleet-info" className="text-gray-700 hover:text-blue-500">Fleet Info</Link>
-        <Link to="/order" className="text-gray-700 hover:text-blue-500">Order</Link>
+        <Link to="/" className="text-gray-700 font-bold hover:text-blue-500 ">Home</Link>
+        <Link to="/fleet-info" className="text-gray-700 hover:text-blue-500 font-bold ">Fleet Info</Link>
+        <Link to="/order" className="text-gray-700 hover:text-blue-500 font-bold ">Order</Link>
       </nav>
       <div className="flex items-center space-x-6">
         <Link to="/notifications" className="text-gray-700 hover:text-blue-500">
