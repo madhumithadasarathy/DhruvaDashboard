@@ -1,89 +1,155 @@
 import React from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import {
+  AccountCircle as AccountIcon,
+  LocalShipping as DeliveryIcon,
+  Star as StarIcon,
+  Phone as PhoneIcon,
+  Email as EmailIcon,
+  DirectionsCar as VehicleIcon,
+  Dashboard as DashboardIcon,
+  ListAlt as OrdersIcon,
+  BarChart as AnalyticsIcon,
+  ArrowBack as ArrowBackIcon,
+} from "@mui/icons-material";
+import { PieChart, Pie, Tooltip, ResponsiveContainer, Cell } from "recharts";
 
-const initialFleetData = [
-    { id: 1, name: "Arun Kumar", image: "/image.png", location: "Chennai, Tamil Nadu", status: "Active", rating: 5 },
-    { id: 2, name: "Venkatesh Reddy", image: "/image.png", location: "Hyderabad, Telangana", status: "Free", rating: 4 },
-    { id: 3, name: "Ravi Shankar", image: "/image.png", location: "Bangalore, Karnataka", status: "Active", rating: 3 },
-    { id: 4, name: "Suresh Babu", image: "/image.png", location: "Kochi, Kerala", status: "Free", rating: 2 },
-    { id: 5, name: "Manoj Nair", image: "/image.png", location: "Thiruvananthapuram, Kerala", status: "Active", rating: 5 },
-    { id: 6, name: "Gopal Krishnan", image: "/image.png", location: "Coimbatore, Tamil Nadu", status: "Free", rating: 4 },
-    { id: 7, name: "Anil Raj", image: "/image.png", location: "Madurai, Tamil Nadu", status: "Active", rating: 5 },
-    { id: 8, name: "Karthik Sharma", image: "/image.png", location: "Mysore, Karnataka", status: "Free", rating: 3 },
-    { id: 9, name: "Prakash Rao", image: "/image.png", location: "Visakhapatnam, Andhra Pradesh", status: "Active", rating: 2 },
-    { id: 10, name: "Hariharan", image: "/image.png", location: "Tirupati, Andhra Pradesh", status: "Free", rating: 1 },
-    { id: 11, name: "Ramachandran", image: "/image.png", location: "Salem, Tamil Nadu", status: "Active", rating: 4 },
-    { id: 12, name: "Bharath Reddy", image: "/image.png", location: "Warangal, Telangana", status: "Free", rating: 3 },
-    { id: 13, name: "Dinesh Menon", image: "/image.png", location: "Kollam, Kerala", status: "Active", rating: 5 },
-    { id: 14, name: "Rajeev Nair", image: "/image.png", location: "Erode, Tamil Nadu", status: "Free", rating: 2 },
-    { id: 15, name: "Sathyanarayan", image: "/image.png", location: "Vijayawada, Andhra Pradesh", status: "Active", rating: 3 },
-    { id: 16, name: "Harish Kumar", image: "/image.png", location: "Belgaum, Karnataka", status: "Free", rating: 1 },
-    { id: 17, name: "Ganesh Rao", image: "/image.png", location: "Hubli, Karnataka", status: "Active", rating: 5 },
-    { id: 18, name: "Narayan Swamy", image: "/image.png", location: "Guntur, Andhra Pradesh", status: "Free", rating: 4 },
-    { id: 19, name: "Raghunathan", image: "/image.png", location: "Tirunelveli, Tamil Nadu", status: "Active", rating: 5 },
-    { id: 20, name: "Mahesh Yadav", image: "/image.png", location: "Kadapa, Andhra Pradesh", status: "Free", rating: 2 },
-    { id: 21, name: "Ramesh Iyer", image: "/image.png", location: "Nellore, Andhra Pradesh", status: "Active", rating: 5 },
-    { id: 22, name: "Srinivasan", image: "/image.png", location: "Udupi, Karnataka", status: "Free", rating: 4 },
-    { id: 23, name: "Kiran Kumar", image: "/image.png", location: "Puducherry", status: "Active", rating: 3 },
-    { id: 24, name: "Vinod Krishna", image: "/image.png", location: "Nagapattinam, Tamil Nadu", status: "Free", rating: 2 },
-    { id: 25, name: "Balaji Rao", image: "/image.png", location: "Trichy, Tamil Nadu", status: "Active", rating: 1 },
-    { id: 26, name: "Sudheer Babu", image: "/image.png", location: "Secunderabad, Telangana", status: "Free", rating: 5 },
-    { id: 27, name: "Kamal Kishore", image: "/image.png", location: "Shimoga, Karnataka", status: "Active", rating: 3 },
-    { id: 28, name: "Dhanush R", image: "/image.png", location: "Vizianagaram, Andhra Pradesh", status: "Free", rating: 2 },
-    { id: 29, name: "Ravi Teja", image: "/image.png", location: "Rajahmundry, Andhra Pradesh", status: "Active", rating: 4 },
-    { id: 30, name: "Vishal Menon", image: "/image.png", location: "Kottayam, Kerala", status: "Free", rating: 5 },
-    { id: 31, name: "Ajay Varma", image: "/image.png", location: "Karimnagar, Telangana", status: "Active", rating: 3 },
-    { id: 32, name: "Murali Krishna", image: "/image.png", location: "Thoothukudi, Tamil Nadu", status: "Free", rating: 1 },
-    { id: 33, name: "Shyam Sundar", image: "/image.png", location: "Gulbarga, Karnataka", status: "Active", rating: 2 },
-    { id: 34, name: "Anirudh Rao", image: "/image.png", location: "Dindigul, Tamil Nadu", status: "Free", rating: 5 },
-    { id: 35, name: "Sachin Babu", image: "/image.png", location: "Bellary, Karnataka", status: "Active", rating: 4 },
-    { id: 36, name: "Kailash Raj", image: "/image.png", location: "Thanjavur, Tamil Nadu", status: "Free", rating: 3 },
-    { id: 37, name: "Gautham Krishna", image: "/image.png", location: "Tenali, Andhra Pradesh", status: "Active", rating: 5 },
-    { id: 38, name: "Mohan Iyer", image: "/image.png", location: "Chidambaram, Tamil Nadu", status: "Free", rating: 1 },
-    { id: 39, name: "Saravanan", image: "/image.png", location: "Kumbakonam, Tamil Nadu", status: "Active", rating: 3 },
-    { id: 40, name: "Deepak Yadav", image: "/image.png", location: "Cuddalore, Tamil Nadu", status: "Free", rating: 2 },
-    { id: 41, name: "Aravind Swamy", image: "/image.png", location: "Hosur, Tamil Nadu", status: "Active", rating: 5 },
-    { id: 42, name: "Ranjith Kumar", image: "/image.png", location: "Machilipatnam, Andhra Pradesh", status: "Free", rating: 4 },
-    { id: 43, name: "Subramaniam", image: "/image.png", location: "Pondicherry", status: "Active", rating: 3 },
-    { id: 44, name: "Charan Reddy", image: "/image.png", location: "Ongole, Andhra Pradesh", status: "Free", rating: 2 },
-    { id: 45, name: "Sanjay Rao", image: "/image.png", location: "Chikkamagaluru, Karnataka", status: "Active", rating: 1 },
-  ];
+// Dummy Data for Analytics
+const driver = {
+  id: 1,
+  name: "Arun Kumar",
+  image: "/image.png",
+  phone: "9876543210",
+  email: "arun.kumar@example.com",
+  experience: 5,
+  vehicle: "Tata Ace Mini Truck",
+  license: "TN 12 AB 3456",
+  age: 34,
+  gender: "Male",
+  currentlyDelivering: {
+    package: "Electronics - Mobile Phone",
+    destination: "Chennai, Tamil Nadu",
+    eta: "2:45 PM",
+    status: "On the way",
+  },
+  lastDelivered: {
+    package: "Furniture - Office Chair",
+    recipient: "Rajesh Verma",
+    deliveredAt: "March 5, 2025 - 4:15 PM",
+    rating: 4.8,
+  },
+  reviews: [
+    { user: "Priya Sharma", feedback: "Very professional and timely!" },
+    { user: "Rahul Gupta", feedback: "Great service, package arrived safely." },
+  ],
+  ratings: 5,
+  totalDeliveries: 245,
+  onTimeDeliveries: 230,
+};
 
-const DriverProfile = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const driver = initialFleetData.find((d) => d.id === parseInt(id));
+// Data for Charts
+const chartData = [
+  { name: "On-Time Deliveries", value: driver.onTimeDeliveries },
+  { name: "Late Deliveries", value: driver.totalDeliveries - driver.onTimeDeliveries },
+];
+const COLORS = ["#4CAF50", "#F44336"];
 
-  if (!driver) return <div className="text-center text-xl mt-10">Driver Not Found</div>;
-
+const DriverDashboard = () => {
   return (
-    <div className="p-6 bg-gray-100 min-h-screen flex">
-      <button onClick={() => navigate(-1)} className="absolute top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-md">← Back</button>
+    <div className="flex h-screen bg-gray-100">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white p-6 shadow-lg flex flex-col">
+        <h2 className="text-2xl font-bold mb-6">Fleet Dashboard</h2>
+        <nav className="space-y-4">
+          <Link to="/fleet-info" className="flex items-center text-gray-700 hover:text-blue-500">
+            <ArrowBackIcon className="mr-2" /> Back to Fleet
+          </Link>
+          <div className="flex items-center text-blue-600 font-semibold">
+            <AccountIcon className="mr-2" /> Profile
+          </div>
+          <div className="flex items-center text-gray-600 hover:text-blue-500 cursor-pointer">
+            <OrdersIcon className="mr-2" /> Deliveries
+          </div>
+          <div className="flex items-center text-gray-600 hover:text-blue-500 cursor-pointer">
+            <AnalyticsIcon className="mr-2" /> Analytics
+          </div>
+        </nav>
+      </aside>
 
-      <div className="bg-white p-6 rounded-lg shadow-lg flex items-center w-full max-w-4xl mx-auto">
-        {/* Driver Image on Left */}
-        <img src={driver.image} alt={driver.name} className="w-48 h-48 rounded-full border-4 border-gray-300" />
+      {/* Main Content */}
+      <main className="flex-1 p-6">
+        {/* Profile Section */}
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="flex items-center space-x-6 border-b pb-4">
+            <img src={driver.image} alt={driver.name} className="w-20 h-20 rounded-full border" />
+            <div>
+              <h2 className="text-2xl font-bold">{driver.name}</h2>
+              <p className="text-gray-500 flex items-center">
+                <PhoneIcon className="text-blue-500 mr-2" /> {driver.phone}
+              </p>
+              <p className="text-gray-500 flex items-center">
+                <EmailIcon className="text-red-500 mr-2" /> {driver.email}
+              </p>
+              <p className="text-gray-600 flex items-center">
+                <VehicleIcon className="text-gray-700 mr-2" /> {driver.vehicle} | License: {driver.license}
+              </p>
+            </div>
+          </div>
 
-        {/* Driver Details on Right */}
-        <div className="ml-6">
-          <h1 className="text-3xl font-bold">{driver.name}</h1>
-          <p className="text-gray-500 text-lg">{driver.location}</p>
+          {/* Delivery Status Section */}
+          <div className="grid grid-cols-2 gap-6 mt-6">
+            {/* Current Delivery */}
+            <div className="bg-blue-100 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold flex items-center">
+                <DeliveryIcon className="text-blue-500 mr-2" /> Currently Delivering
+              </h3>
+              <p><b>Package:</b> {driver.currentlyDelivering.package}</p>
+              <p><b>Destination:</b> {driver.currentlyDelivering.destination}</p>
+              <p><b>ETA:</b> {driver.currentlyDelivering.eta}</p>
+              <p><b>Status:</b> {driver.currentlyDelivering.status}</p>
+            </div>
 
-          <div className="mt-4">
-            <p className="text-gray-700"><strong>Age:</strong> {driver.age}</p>
-            <p className="text-gray-700"><strong>Experience:</strong> {driver.experience}</p>
-            <p className="text-gray-700"><strong>Vehicle:</strong> {driver.vehicle}</p>
+            {/* Last Delivered */}
+            <div className="bg-green-100 p-4 rounded-lg">
+              <h3 className="text-lg font-semibold">Last Delivered</h3>
+              <p><b>Package:</b> {driver.lastDelivered.package}</p>
+              <p><b>Recipient:</b> {driver.lastDelivered.recipient}</p>
+              <p><b>Delivered At:</b> {driver.lastDelivered.deliveredAt}</p>
+              <p className="flex items-center">
+                <b>Rating:</b> {driver.lastDelivered.rating}
+                <StarIcon className="text-yellow-500 ml-1" />
+              </p>
+            </div>
+          </div>
 
-            <p className="mt-2"><strong>Star Rating:</strong> {"⭐".repeat(driver.rating)}</p>
+          {/* Performance Charts */}
+          <div className="mt-6 bg-gray-50 p-6 rounded-lg">
+            <h3 className="text-lg font-semibold">Performance Analytics</h3>
+            <div className="flex justify-center">
+              <ResponsiveContainer width="50%" height={200}>
+                <PieChart>
+                  <Pie data={chartData} dataKey="value" cx="50%" cy="50%" outerRadius={80} fill="#8884d8">
+                    {chartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
 
-            <span className={`inline-block mt-2 px-3 py-1 text-white rounded-full text-sm ${driver.status === "Active" ? "bg-red-500" : "bg-green-500"}`}>
-              {driver.status}
-            </span>
+          {/* Reviews */}
+          <div className="mt-6 bg-white p-4 rounded-lg shadow">
+            <h3 className="text-lg font-semibold">Customer Feedback</h3>
+            {driver.reviews.map((review, index) => (
+              <p key={index}><b>{review.user}:</b> {review.feedback}</p>
+            ))}
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };
 
-export default DriverProfile;
+export default DriverDashboard;

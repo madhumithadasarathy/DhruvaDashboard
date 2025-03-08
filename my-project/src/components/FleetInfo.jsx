@@ -2,51 +2,56 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const initialFleetData = [
-  { id: 1, name: "Arun Kumar", image: "/image.png", location: "Chennai, Tamil Nadu", status: "Active", rating: 5 },
-  { id: 2, name: "Venkatesh Reddy", image: "/image.png", location: "Hyderabad, Telangana", status: "Free", rating: 4 },
-  { id: 3, name: "Ravi Shankar", image: "/image.png", location: "Bangalore, Karnataka", status: "Active", rating: 3 },
-  { id: 4, name: "Suresh Babu", image: "/image.png", location: "Kochi, Kerala", status: "Free", rating: 2 },
-  { id: 5, name: "Manoj Nair", image: "/image.png", location: "Thiruvananthapuram, Kerala", status: "Active", rating: 5 },
-  { id: 6, name: "Gopal Krishnan", image: "/image.png", location: "Coimbatore, Tamil Nadu", status: "Free", rating: 4 },
-  { id: 7, name: "Anil Raj", image: "/image.png", location: "Madurai, Tamil Nadu", status: "Active", rating: 5 },
-  { id: 8, name: "Karthik Sharma", image: "/image.png", location: "Mysore, Karnataka", status: "Free", rating: 3 },
-  { id: 9, name: "Prakash Rao", image: "/image.png", location: "Visakhapatnam, Andhra Pradesh", status: "Active", rating: 2 },
-  { id: 10, name: "Hariharan", image: "/image.png", location: "Tirupati, Andhra Pradesh", status: "Free", rating: 1 },
-  { id: 11, name: "Ramachandran", image: "/image.png", location: "Salem, Tamil Nadu", status: "Active", rating: 4 },
-  { id: 12, name: "Bharath Reddy", image: "/image.png", location: "Warangal, Telangana", status: "Free", rating: 3 },
-  { id: 13, name: "Dinesh Menon", image: "/image.png", location: "Kollam, Kerala", status: "Active", rating: 5 },
-  { id: 14, name: "Rajeev Nair", image: "/image.png", location: "Erode, Tamil Nadu", status: "Free", rating: 2 },
-  { id: 15, name: "Sathyanarayan", image: "/image.png", location: "Vijayawada, Andhra Pradesh", status: "Active", rating: 3 },
-  { id: 16, name: "Harish Kumar", image: "/image.png", location: "Belgaum, Karnataka", status: "Free", rating: 1 },
-  { id: 17, name: "Ganesh Rao", image: "/image.png", location: "Hubli, Karnataka", status: "Active", rating: 5 },
-  { id: 18, name: "Narayan Swamy", image: "/image.png", location: "Guntur, Andhra Pradesh", status: "Free", rating: 4 },
-  { id: 19, name: "Raghunathan", image: "/image.png", location: "Tirunelveli, Tamil Nadu", status: "Active", rating: 5 },
-  { id: 20, name: "Mahesh Yadav", image: "/image.png", location: "Kadapa, Andhra Pradesh", status: "Free", rating: 2 },
-  { id: 21, name: "Ramesh Iyer", image: "/image.png", location: "Nellore, Andhra Pradesh", status: "Active", rating: 5 },
-  { id: 22, name: "Srinivasan", image: "/image.png", location: "Udupi, Karnataka", status: "Free", rating: 4 },
-  { id: 23, name: "Kiran Kumar", image: "/image.png", location: "Puducherry", status: "Active", rating: 3 },
-  { id: 24, name: "Vinod Krishna", image: "/image.png", location: "Nagapattinam, Tamil Nadu", status: "Free", rating: 2 },
-  { id: 25, name: "Balaji Rao", image: "/image.png", location: "Trichy, Tamil Nadu", status: "Active", rating: 1 },
-  { id: 26, name: "Sudheer Babu", image: "/image.png", location: "Secunderabad, Telangana", status: "Free", rating: 5 },
-  { id: 27, name: "Kamal Kishore", image: "/image.png", location: "Shimoga, Karnataka", status: "Active", rating: 3 },
-  { id: 28, name: "Dhanush R", image: "/image.png", location: "Vizianagaram, Andhra Pradesh", status: "Free", rating: 2 },
-  { id: 29, name: "Ravi Teja", image: "/image.png", location: "Rajahmundry, Andhra Pradesh", status: "Active", rating: 4 },
-  { id: 30, name: "Vishal Menon", image: "/image.png", location: "Kottayam, Kerala", status: "Free", rating: 5 },
-  { id: 31, name: "Ajay Varma", image: "/image.png", location: "Karimnagar, Telangana", status: "Active", rating: 3 },
-  { id: 32, name: "Murali Krishna", image: "/image.png", location: "Thoothukudi, Tamil Nadu", status: "Free", rating: 1 },
-  { id: 33, name: "Shyam Sundar", image: "/image.png", location: "Gulbarga, Karnataka", status: "Active", rating: 2 },
-  { id: 34, name: "Anirudh Rao", image: "/image.png", location: "Dindigul, Tamil Nadu", status: "Free", rating: 5 },
-  { id: 35, name: "Sachin Babu", image: "/image.png", location: "Bellary, Karnataka", status: "Active", rating: 4 },
-  { id: 36, name: "Kailash Raj", image: "/image.png", location: "Thanjavur, Tamil Nadu", status: "Free", rating: 3 },
-  { id: 37, name: "Gautham Krishna", image: "/image.png", location: "Tenali, Andhra Pradesh", status: "Active", rating: 5 },
-  { id: 38, name: "Mohan Iyer", image: "/image.png", location: "Chidambaram, Tamil Nadu", status: "Free", rating: 1 },
-  { id: 39, name: "Saravanan", image: "/image.png", location: "Kumbakonam, Tamil Nadu", status: "Active", rating: 3 },
-  { id: 40, name: "Deepak Yadav", image: "/image.png", location: "Cuddalore, Tamil Nadu", status: "Free", rating: 2 },
-  { id: 41, name: "Aravind Swamy", image: "/image.png", location: "Hosur, Tamil Nadu", status: "Active", rating: 5 },
-  { id: 42, name: "Ranjith Kumar", image: "/image.png", location: "Machilipatnam, Andhra Pradesh", status: "Free", rating: 4 },
-  { id: 43, name: "Subramaniam", image: "/image.png", location: "Pondicherry", status: "Active", rating: 3 },
-  { id: 44, name: "Charan Reddy", image: "/image.png", location: "Ongole, Andhra Pradesh", status: "Free", rating: 2 },
-  { id: 45, name: "Sanjay Rao", image: "/image.png", location: "Chikkamagaluru, Karnataka", status: "Active", rating: 1 },
+  { id: 1, name: "Arun Kumar", image: "/image.png", location: "Chennai, Tamil Nadu", status: "Active", rating: 5, experience: 5, deliveries: 245 },
+  { id: 2, name: "Venkatesh Reddy", image: "/image.png", location: "Hyderabad, Telangana", status: "Free", rating: 4, experience: 3, deliveries: 180 },
+  { id: 3, name: "Ravi Shankar", image: "/image.png", location: "Bangalore, Karnataka", status: "Active", rating: 3, experience: 7, deliveries: 320 },
+  { id: 4, name: "Suresh Babu", image: "/image.png", location: "Kochi, Kerala", status: "Free", rating: 2, experience: 2, deliveries: 105 },
+  { id: 5, name: "Manoj Nair", image: "/image.png", location: "Thiruvananthapuram, Kerala", status: "Active", rating: 5, experience: 6, deliveries: 290 },
+  { id: 6, name: "Gopal Krishnan", image: "/image.png", location: "Coimbatore, Tamil Nadu", status: "Free", rating: 4, experience: 4, deliveries: 210 },
+  { id: 7, name: "Anil Raj", image: "/image.png", location: "Madurai, Tamil Nadu", status: "Active", rating: 5, experience: 5, deliveries: 250 },
+  { id: 8, name: "Karthik Sharma", image: "/image.png", location: "Mysore, Karnataka", status: "Free", rating: 3, experience: 3, deliveries: 170 },
+  { id: 9, name: "Prakash Rao", image: "/image.png", location: "Visakhapatnam, Andhra Pradesh", status: "Active", rating: 2, experience: 1, deliveries: 80 },
+  { id: 10, name: "Hariharan", image: "/image.png", location: "Tirupati, Andhra Pradesh", status: "Free", rating: 1, experience: 2, deliveries: 95 },
+  { id: 11, name: "Ramachandran", image: "/image.png", location: "Salem, Tamil Nadu", status: "Active", rating: 4, experience: 5, deliveries: 230 },
+  { id: 12, name: "Bharath Reddy", image: "/image.png", location: "Warangal, Telangana", status: "Free", rating: 3, experience: 4, deliveries: 190 },
+  { id: 13, name: "Dinesh Menon", image: "/image.png", location: "Kollam, Kerala", status: "Active", rating: 5, experience: 7, deliveries: 310 },
+  { id: 14, name: "Rajeev Nair", image: "/image.png", location: "Erode, Tamil Nadu", status: "Free", rating: 2, experience: 2, deliveries: 110 },
+  { id: 15, name: "Sathyanarayan", image: "/image.png", location: "Vijayawada, Andhra Pradesh", status: "Active", rating: 3, experience: 3, deliveries: 180 },
+  { id: 16, name: "Harish Kumar", image: "/image.png", location: "Belgaum, Karnataka", status: "Free", rating: 1, experience: 1, deliveries: 75 },
+  { id: 17, name: "Ganesh Rao", image: "/image.png", location: "Hubli, Karnataka", status: "Active", rating: 5, experience: 6, deliveries: 280 },
+  { id: 18, name: "Narayan Swamy", image: "/image.png", location: "Guntur, Andhra Pradesh", status: "Free", rating: 4, experience: 4, deliveries: 220 },
+  { id: 19, name: "Raghunathan", image: "/image.png", location: "Tirunelveli, Tamil Nadu", status: "Active", rating: 5, experience: 5, deliveries: 260 },
+  { id: 20, name: "Mahesh Yadav", image: "/image.png", location: "Kadapa, Andhra Pradesh", status: "Free", rating: 2, experience: 2, deliveries: 100 },
+  { id: 21, name: "Ramesh Iyer", image: "/image.png", location: "Nellore, Andhra Pradesh", status: "Active", rating: 5, experience: 7, deliveries: 340 },
+  { id: 22, name: "Srinivasan", image: "/image.png", location: "Udupi, Karnataka", status: "Free", rating: 4, experience: 3, deliveries: 175 },
+  { id: 23, name: "Kiran Kumar", image: "/image.png", location: "Puducherry", status: "Active", rating: 3, experience: 2, deliveries: 120 },
+  { id: 24, name: "Vinod Krishna", image: "/image.png", location: "Nagapattinam, Tamil Nadu", status: "Free", rating: 2, experience: 1, deliveries: 90 },
+  { id: 25, name: "Balaji Rao", image: "/image.png", location: "Trichy, Tamil Nadu", status: "Active", rating: 1, experience: 2, deliveries: 105 },
+  { id: 26, name: "Sudheer Babu", image: "/image.png", location: "Secunderabad, Telangana", status: "Free", rating: 5, experience: 6, deliveries: 285 },
+  { id: 27, name: "Kamal Kishore", image: "/image.png", location: "Shimoga, Karnataka", status: "Active", rating: 3, experience: 3, deliveries: 160 },
+  { id: 28, name: "Dhanush R", image: "/image.png", location: "Vizianagaram, Andhra Pradesh", status: "Free", rating: 2, experience: 1, deliveries: 80 },
+  { id: 29, name: "Ravi Teja", image: "/image.png", location: "Rajahmundry, Andhra Pradesh", status: "Active", rating: 4, experience: 5, deliveries: 220 },
+  { id: 30, name: "Vishal Menon", image: "/image.png", location: "Kottayam, Kerala", status: "Free", rating: 5, experience: 7, deliveries: 330 },
+  { id: 31, name: "Ajay Varma", image: "/image.png", location: "Karimnagar, Telangana", status: "Active", rating: 3, experience: 4, deliveries: 190 },
+  { id: 32, name: "Shyam Sundar", image: "/image.png", location: "Gulbarga, Karnataka", status: "Active", rating: 4, experience: 5, deliveries: 200 },
+  { id: 33, name: "Anirudh Rao", image: "/image.png", location: "Dindigul, Tamil Nadu", status: "Free", rating: 5, experience: 6, deliveries: 270 },
+  { id: 34, name: "Sachin Babu", image: "/image.png", location: "Bellary, Karnataka", status: "Active", rating: 4, experience: 4, deliveries: 190 },
+  { id: 35, name: "Kailash Raj", image: "/image.png", location: "Thanjavur, Tamil Nadu", status: "Free", rating: 3, experience: 3, deliveries: 150 },
+  { id: 36, name: "Subramaniam", image: "/image.png", location: "Pondicherry", status: "Active", rating: 3, experience: 4, deliveries: 210 },
+  { id: 37, name: "Charan Reddy", image: "/image.png", location: "Ongole, Andhra Pradesh", status: "Free", rating: 2, experience: 2, deliveries: 95 },
+  { id: 38, name: "Sanjay Rao", image: "/image.png", location: "Chikkamagaluru, Karnataka", status: "Active", rating: 1, experience: 1, deliveries: 85 },
+  { id: 39, name: "Arun Vijay", image: "/image.png", location: "Thanjavur, Tamil Nadu", status: "Free", rating: 5, experience: 6, deliveries: 290 },
+  { id: 40, name: "Dilip Kumar", image: "/image.png", location: "Kurnool, Andhra Pradesh", status: "Active", rating: 3, experience: 3, deliveries: 170 },
+  { id: 41, name: "Santosh Babu", image: "/image.png", location: "Nizamabad, Telangana", status: "Free", rating: 2, experience: 2, deliveries: 110 },
+  { id: 42, name: "Keshav Raj", image: "/image.png", location: "Mangalore, Karnataka", status: "Active", rating: 4, experience: 5, deliveries: 215 },
+  { id: 43, name: "Jagadeesh Rao", image: "/image.png", location: "Gadag, Karnataka", status: "Free", rating: 3, experience: 3, deliveries: 160 },
+  { id: 44, name: "Vinay Menon", image: "/image.png", location: "Tumkur, Karnataka", status: "Active", rating: 5, experience: 7, deliveries: 320 },
+  { id: 45, name: "Sathish Kumar", image: "/image.png", location: "Kolar, Karnataka", status: "Free", rating: 4, experience: 4, deliveries: 205 },
+  { id: 46, name: "Saravanan M", image: "/image.png", location: "Chennai, TamilNadu", status: "Free", rating: 3, experience: 2, deliveries: 116 },
+  { id: 47, name: "Nileshwar Rao", image: "/image.png", location: "Mangalore, Karnataka", status: "Active", rating: 4, experience: 15, deliveries: 415 },
+  { id: 48, name: "Devnath", image: "/image.png", location: "Gadag, Karnataka", status: "Free", rating: 5, experience: 13, deliveries: 760 },
+  { id: 49, name: "Vinay Menon", image: "/image.png", location: "Tumkur, Karnataka", status: "Active", rating: 5, experience: 7, deliveries: 320 },
+  { id: 50, name: "Sathish Kumar", image: "/image.png", location: "Kolar, Karnataka", status: "Free", rating: 4, experience: 4, deliveries: 405 },
 ];
 
 const FleetInfo = () => {
@@ -54,7 +59,7 @@ const FleetInfo = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterOption, setFilterOption] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const driversPerPage = 10;
+  const driversPerPage = 8;
 
   const filteredFleet = fleetData.filter((driver) => {
     const matchesSearch = driver.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -86,7 +91,7 @@ const FleetInfo = () => {
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Fleet Information</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-6 uppercase tracking-widest">Fleet Information</h1>
 
       {/* Search, Filter, and Add Driver (Aligned in One Row) */}
       <div className="flex flex-wrap items-center bg-white p-4 rounded-lg shadow-md mb-6 space-x-4">
