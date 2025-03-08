@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 const initialFleetData = [
   { id: 1, name: "Arun Kumar", image: "/image.png", location: "Chennai, Tamil Nadu", status: "Active", rating: 5, experience: 5, deliveries: 245 },
-  { id: 2, name: "Venkatesh Reddy", image: "/image.png", location: "Hyderabad, Telangana", status: "Free", rating: 4, experience: 3, deliveries: 180 },
+  { id: 2, name: "Venkatesh Reddy", image: "/image.png", location: "Hyderabad, Telangana", status: "Active", rating: 4, experience: 3, deliveries: 180 },
   { id: 3, name: "Ravi Shankar", image: "/image.png", location: "Bangalore, Karnataka", status: "Active", rating: 3, experience: 7, deliveries: 320 },
-  { id: 4, name: "Suresh Babu", image: "/image.png", location: "Kochi, Kerala", status: "Free", rating: 2, experience: 2, deliveries: 105 },
+  { id: 4, name: "Suresh Babu", image: "/image.png", location: "Kochi, Kerala", status: "Active", rating: 2, experience: 2, deliveries: 105 },
   { id: 5, name: "Manoj Nair", image: "/image.png", location: "Thiruvananthapuram, Kerala", status: "Active", rating: 5, experience: 6, deliveries: 290 },
-  { id: 6, name: "Gopal Krishnan", image: "/image.png", location: "Coimbatore, Tamil Nadu", status: "Free", rating: 4, experience: 4, deliveries: 210 },
+  { id: 6, name: "Gopal Krishnan", image: "/image.png", location: "Coimbatore, Tamil Nadu", status: "Active", rating: 4, experience: 4, deliveries: 210 },
   { id: 7, name: "Anil Raj", image: "/image.png", location: "Madurai, Tamil Nadu", status: "Active", rating: 5, experience: 5, deliveries: 250 },
-  { id: 8, name: "Karthik Sharma", image: "/image.png", location: "Mysore, Karnataka", status: "Free", rating: 3, experience: 3, deliveries: 170 },
+  { id: 8, name: "Karthik Sharma", image: "/image.png", location: "Mysore, Karnataka", status: "Active", rating: 3, experience: 3, deliveries: 170 },
   { id: 9, name: "Prakash Rao", image: "/image.png", location: "Visakhapatnam, Andhra Pradesh", status: "Active", rating: 2, experience: 1, deliveries: 80 },
   { id: 10, name: "Hariharan", image: "/image.png", location: "Tirupati, Andhra Pradesh", status: "Free", rating: 1, experience: 2, deliveries: 95 },
   { id: 11, name: "Ramachandran", image: "/image.png", location: "Salem, Tamil Nadu", status: "Active", rating: 4, experience: 5, deliveries: 230 },
